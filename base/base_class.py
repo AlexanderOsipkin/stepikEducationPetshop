@@ -1,5 +1,9 @@
 from pathlib import Path
 import datetime
+from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 
 class Base():
@@ -13,7 +17,7 @@ class Base():
         print(f'Current url: {get_url}')
 
     """Method assert word"""
-    def assertion_word(self, word, result):
+    def assert_value(self, word, result):
         value_word = word.text
         assert value_word == result
         print("Good value word")
@@ -32,3 +36,13 @@ class Base():
         get_url = self.driver.current_url
         assert get_url == result
         print("Good value url")
+
+    """Method close popup"""
+    def close_popup(self):
+        try:
+            close_button = WebDriverWait(self.driver, 3).until(EC.element_to_be_clickable((By.XPATH, "//button[@class='TutoringEcoTooltip_button__zhTqX']")))
+            close_button.click()
+            print("Popup closed")
+
+        except TimeoutException:
+            print("Popup not found")

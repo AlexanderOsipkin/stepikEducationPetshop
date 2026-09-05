@@ -73,6 +73,8 @@ class LoginPage(Base):
         self.driver.set_window_size(1920, 1080)
         self.get_current_url()
 
+        self.close_popup()
+
         self.click_enter_button()
         self.click_login_button()
         self.input_user_name(os.getenv("PETSHOP_LOGIN"))
@@ -83,4 +85,4 @@ class LoginPage(Base):
 
         self.driver.refresh()
 
-        self.assertion_word(self.get_user_info_after_login(), os.getenv("PETSHOP_LOGIN"))
+        self.assert_value(self.get_user_info_after_login(), os.getenv("PETSHOP_LOGIN"))
