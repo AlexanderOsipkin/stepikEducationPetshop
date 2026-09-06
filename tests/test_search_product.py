@@ -8,5 +8,5 @@ def test_search_product(driver):
     login.authorization()
 
     # Ищем продукт в поле поиска
-    mp = MainPage(driver)
-    mp.search_product()
+    main_page = MainPage(driver)
+    main_page.search_product()

@@ -1,0 +1,22 @@
+from pages.login_page import LoginPage
+from pages.menu_page import MenuPage
+from pages.card_page import CardPage
+from pages.cart_page import CartPage
+
+
+def test_buy_product(driver):
+    # Логинимся
+    login = LoginPage(driver)
+    login.authorization()
+
+    # Ищем витамины из меню на главной странице
+    menu_page = MenuPage(driver)
+    menu_page.search_vitamins()
+
+    # Просматриваем карточку товара
+    card_page = CardPage(driver)
+    card_page.vitamin_card()
+
+    # Проверяем товар в корзине
+    cart_page = CartPage(driver)
+    cart_page.assert_product_in_cart()
