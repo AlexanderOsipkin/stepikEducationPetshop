@@ -36,11 +36,12 @@ class MainPage(Base):
     # METHODS
     def search_product(self):
         self.driver.get(self.url)
-        self.driver.set_window_size(1920, 1080)
         self.get_current_url()
 
         self.close_popup()
 
         self.input_text_in_search_field("Royal Canin")
         self.accept_value_in_search_field()
+
         self.assert_text_contains(self.get_product_brand_name(), "Royal Canin")
+        print("Product correct")

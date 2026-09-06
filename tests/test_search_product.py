@@ -1,13 +1,6 @@
-from selenium import webdriver
-
 from pages.main_page import MainPage
 
 
-def test_search_product():
-    options = webdriver.ChromeOptions()
-    options.add_experimental_option("detach", True)
-    options.add_argument("--guest")
-    driver = webdriver.Chrome(options=options)
-
-    mp = MainPage(driver)
+def test_search_product(setup_browser):
+    mp = MainPage(setup_browser)
     mp.search_product()

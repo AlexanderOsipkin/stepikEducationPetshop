@@ -7,6 +7,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from base.base_class import Base
 from dotenv import load_dotenv
 
+
 load_dotenv()
 
 login = os.getenv("PETSHOP_LOGIN")
@@ -23,7 +24,6 @@ class LoginPage(Base):
     # LOCATORS
     enter_button = "(//button[@data-testid='button'])[1]"
     login_button = "//button[@data-testid='PhoneAuthorization__clickableText-loginAuth']"
-    # 79952360481 -SAF%A-,
     user_name = "//input[@data-testid='TextInput__Input']"
     user_password = "//input[@name='root_password']"
     authorization_button = "//button[@data-testid='LoginAuthorization__btn-enabled']"
@@ -70,19 +70,22 @@ class LoginPage(Base):
     # METHODS
     def authorization(self):
         self.driver.get(self.url)
-        self.driver.set_window_size(1920, 1080)
         self.get_current_url()
 
         self.close_popup()
 
         self.click_enter_button()
         self.click_login_button()
-        self.input_user_name(os.getenv("PETSHOP_LOGIN"))
-        self.input_user_password(os.getenv("PETSHOP_PASSWORD"))
+
+        self.input_user_name(login)
+        self.input_user_password(password)
+
         self.click_authorization_button()
 
         time.sleep(3)
 
         self.driver.refresh()
 
-        self.assert_value(self.get_user_info_after_login(), os.getenv("PETSHOP_LOGIN"))
+        self.assert_value(self.get_user_info_after_login(), login)
+
+        print("Login success")
