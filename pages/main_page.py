@@ -6,8 +6,6 @@ from selenium.webdriver import Keys
 
 
 class MainPage(Base):
-    url = "https://www.petshop.ru/"
-
     def __init__(self, driver):
         super().__init__(driver)
         self.driver = driver
@@ -35,7 +33,7 @@ class MainPage(Base):
 
     # METHODS
     def search_product(self):
-        self.driver.get(self.url)
+        self.driver.get(self.driver.base_url)
         self.get_current_url()
 
         self.close_popup()
@@ -43,5 +41,7 @@ class MainPage(Base):
         self.input_text_in_search_field("Royal Canin")
         self.accept_value_in_search_field()
 
-        self.assert_text_contains(self.get_product_brand_name(), "Royal Canin")
+        self.assert_value(self.get_product_brand_name(), "Royal Canin")
+        self.assert_url("https://www.petshop.ru/search/?q=Royal%20Canin")
+        self.get_screenshot()
         print("Product correct")

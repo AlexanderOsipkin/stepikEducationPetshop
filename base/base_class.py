@@ -47,8 +47,3 @@ class Base():
 
         except TimeoutException:
             print("Popup not found")
-
-    """Method assert text"""
-    def assert_text_contains(self, element, expected_text):
-        assert expected_text in element.text
-        print("Text contains expected value")

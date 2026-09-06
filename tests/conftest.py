@@ -1,7 +1,7 @@
 import pytest
 from selenium import webdriver
 
-from utilities.attach import add_screenshot, add_logs, add_html
+BASE_URL = "https://www.petshop.ru/"
 
 
 @pytest.fixture(scope="session")
@@ -12,10 +12,8 @@ def driver():
     driver = webdriver.Chrome(options=options)
     driver.set_window_size(1920, 1080)
 
-    yield driver
+    driver.base_url = BASE_URL
 
-    add_screenshot(driver)
-    add_logs(driver)
-    add_html(driver)
+    yield driver
 
     driver.quit()

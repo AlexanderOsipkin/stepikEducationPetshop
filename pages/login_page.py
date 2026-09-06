@@ -15,8 +15,6 @@ password = os.getenv("PETSHOP_PASSWORD")
 
 
 class LoginPage(Base):
-    url = "https://www.petshop.ru/"
-
     def __init__(self, driver):
         super().__init__(driver)
         self.driver = driver
@@ -69,7 +67,7 @@ class LoginPage(Base):
 
     # METHODS
     def authorization(self):
-        self.driver.get(self.url)
+        self.driver.get(self.driver.base_url)
         self.get_current_url()
 
         self.close_popup()
@@ -82,10 +80,12 @@ class LoginPage(Base):
 
         self.click_authorization_button()
 
-        time.sleep(3)
+        time.sleep(1)
 
         self.driver.refresh()
 
         self.assert_value(self.get_user_info_after_login(), login)
+        self.assert_url("https://www.petshop.ru/#popup=login-auth")
+        self.get_screenshot()
 
         print("Login success")
