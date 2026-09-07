@@ -44,7 +44,7 @@ class CartPage(Base):
         self.click_cart_button()
 
         product = self.get_product_in_cart()
-        print("Товар в корзине:", repr(product.text))
+        print("Product in cart:", repr(product.text))
 
         self.assert_value(self.get_product_in_cart(), "Unitabs Витамины ArthroАctive с Q10 для собак, 100таб")
         self.assert_url("https://www.petshop.ru/personal/cart/")

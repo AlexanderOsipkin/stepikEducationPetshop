@@ -1,5 +1,7 @@
-from pathlib import Path
+import re
 import datetime
+
+from pathlib import Path
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
@@ -55,3 +57,10 @@ class Base():
 
         except TimeoutException:
             print("Cookie popup not found")
+
+    """Method assert phone number"""
+    def assert_phone(self, word, result):
+        actual_phone = re.sub(r"\D", "", word.text)
+        expected_phone = re.sub(r"\D", "", result)
+
+        assert actual_phone[-10:] == expected_phone[-10:]
