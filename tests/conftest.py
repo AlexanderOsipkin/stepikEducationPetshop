@@ -7,7 +7,7 @@ BASE_URL = "https://www.petshop.ru/"
 @pytest.fixture(scope="session")
 def driver():
     options = webdriver.ChromeOptions()
-    # options.add_experimental_option("detach", True)
+    options.add_experimental_option("detach", True)
     options.add_argument("--guest")
 
     driver = webdriver.Chrome(options=options)
@@ -17,4 +17,4 @@ def driver():
 
     yield driver
 
-    driver.quit()
+    # driver.quit()

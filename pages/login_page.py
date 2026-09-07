@@ -71,6 +71,7 @@ class LoginPage(Base):
         self.get_current_url()
 
         self.close_popup()
+        self.close_cookie()
 
         self.click_enter_button()
         self.click_login_button()

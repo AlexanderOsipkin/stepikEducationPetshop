@@ -47,3 +47,11 @@ class Base():
 
         except TimeoutException:
             print("Popup not found")
+
+    """Method close cookie"""
+    def close_cookie(self):
+        try:
+            WebDriverWait(self.driver, 3).until(EC.element_to_be_clickable((By.XPATH, "//button[@title='Закрыть']"))).click()
+
+        except TimeoutException:
+            print("Cookie popup not found")
