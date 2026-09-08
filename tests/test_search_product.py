@@ -3,9 +3,9 @@ from pages.login_page import LoginPage
 
 
 def test_search_product(driver):
-    # Логинимся
-    login = LoginPage(driver)
-    login.authorization()
+    # Авторизация
+    login_page = LoginPage(driver)
+    login_page.authorization()
 
     # Ищем продукт в поле поиска
     main_page = MainPage(driver)
