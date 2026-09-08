@@ -6,9 +6,6 @@ from selenium.webdriver import Keys
 
 
 class MainPage(Base):
-    def __init__(self, driver):
-        super().__init__(driver)
-        self.driver = driver
 
     # LOCATORS
     search_field = "//input[@data-testid='search_field']"
@@ -25,11 +22,11 @@ class MainPage(Base):
 
     def input_text_in_search_field(self, text):
         self.get_search_field().send_keys(text)
-        print("Input some text in search field")
+        print(f"Input search text: {text}")
 
     def accept_value_in_search_field(self):
         self.get_search_field().send_keys(Keys.ENTER)
-        print("Accept enter value")
+        print("Press Enter in search field")
 
     # METHODS
     def search_product(self):
@@ -43,5 +40,6 @@ class MainPage(Base):
 
         self.assert_value(self.get_product_brand_name(), "Royal Canin")
         self.assert_url("https://www.petshop.ru/search/?q=Royal%20Canin")
+
         self.get_screenshot()
         print("Product correct")

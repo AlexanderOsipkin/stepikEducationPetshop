@@ -3,12 +3,12 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from base.base_class import Base
 
+vitamin_brand = "Unitabs"
+product_title = "Витамины ArthroАctive с Q10 для собак, 100таб"
+product_url = "https://www.petshop.ru/catalog/dogs/vet/vitaminy-dlya-sobak/dlya-kostey-i-sustavov-sobak/vitamins-arthroactive-with-q10-for-dogs-100tab/?oid=70291"
+
 
 class CardPage(Base):
-    def __init__(self, driver):
-        super().__init__(driver)
-        self.driver = driver
-
     # LOCATORS
     vitamins_card = "//a[.//span[@data-testid='productListCard__title']]"
     brand_card_header = "//a[@data-tesid='productDetails__titleBrand']"
@@ -44,12 +44,12 @@ class CardPage(Base):
         self.get_current_url()
 
         self.click_vitamins_card()
-        self.assert_value(self.get_brand_card_header(), "Unitabs")
-        self.assert_value(self.get_product_title(), "Витамины ArthroАctive с Q10 для собак, 100таб")
-        self.assert_url(
-            "https://www.petshop.ru/catalog/dogs/vet/vitaminy-dlya-sobak/dlya-kostey-i-sustavov-sobak/vitamins-arthroactive-with-q10-for-dogs-100tab/?oid=70291")
 
-        # product_price = self.get_product_price().text
+        self.assert_value(self.get_brand_card_header(), vitamin_brand)
+        self.assert_value(self.get_product_title(), product_title)
+        self.assert_url(product_url)
+
+        print(f"Product price: {self.get_product_price().text}")
 
         self.click_add_product_in_cart()
 

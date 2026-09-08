@@ -15,10 +15,6 @@ password = os.getenv("PETSHOP_PASSWORD")
 
 
 class LoginPage(Base):
-    def __init__(self, driver):
-        super().__init__(driver)
-        self.driver = driver
-
     # LOCATORS
     enter_button = "(//button[@data-testid='button'])[1]"
     login_button = "//button[@data-testid='PhoneAuthorization__clickableText-loginAuth']"
@@ -63,7 +59,7 @@ class LoginPage(Base):
 
     def click_authorization_button(self):
         self.get_authorization_button().click()
-        print("Click to the authorization button")
+        print("Click authorization button")
 
     # METHODS
     def authorization(self):

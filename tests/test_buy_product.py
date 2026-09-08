@@ -6,11 +6,11 @@ from pages.finish_page import FinishPage
 
 
 def test_buy_product(driver):
-    # Логинимся
-    login = LoginPage(driver)
-    login.authorization()
+    # Авторизация
+    login_page = LoginPage(driver)
+    login_page.authorization()
 
-    # Ищем витамины из меню на главной странице
+    # Поиск витаминов через меню
     menu_page = MenuPage(driver)
     menu_page.search_vitamins()
 
@@ -22,7 +22,7 @@ def test_buy_product(driver):
     cart_page = CartPage(driver)
     cart_page.assert_product_in_cart()
 
-    # Оформляем заказ
+    # Оформление заказа
     finish_page = FinishPage(driver)
     finish_page.confirm_order()
 

@@ -3,11 +3,10 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from base.base_class import Base
 
+vitamin_brand = "Unitabs"
+
 
 class MenuPage(Base):
-    def __init__(self, driver):
-        super().__init__(driver)
-        self.driver = driver
 
     # LOCATORS
     menu_vitamins = "//a[@href='/catalog/dogs/vitamins/']"
@@ -59,19 +58,23 @@ class MenuPage(Base):
 
     def input_search_brand(self, text):
         self.get_search_brand().send_keys(text)
-        print("Search vitamins brand")
+        print(f"Search brand: {text}")
 
     def click_vitamins_checkbox(self):
         self.get_vitamins_checkbox().click()
+        print("Select vitamin brand")
 
     def click_apply_button(self):
         self.get_apply_button().click()
+        print("Apply filter")
 
     def click_age_button(self):
         self.get_age_button().click()
+        print("Open age filter")
 
     def click_age_checkbox(self):
         self.get_age_checkbox().click()
+        print("Select age")
 
     # METHODS
     def search_vitamins(self):
@@ -85,7 +88,7 @@ class MenuPage(Base):
         self.assert_value(self.get_vitamins_header(), "Витамины и добавки для собак")
 
         self.click_brand_button()
-        self.input_search_brand("Unitabs")
+        self.input_search_brand(vitamin_brand)
         self.click_vitamins_checkbox()
         self.click_apply_button()
         self.click_age_button()

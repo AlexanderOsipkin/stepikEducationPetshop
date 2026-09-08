@@ -14,14 +14,12 @@ user_email = os.getenv("USER_EMAIL")
 phone_number = os.getenv("PHONE_NUMBER")
 city = os.getenv("USER_CITY")
 pickup_name = os.getenv("PICKUP_NAME")
+
 change_sum = 12345
 order_comment = "test"
 
 
 class FinishPage(Base):
-    def __init__(self, driver):
-        super().__init__(driver)
-        self.driver = driver
 
     # LOCATORS
     add_recipient1_button = "(//button[@data-testid='add-recipient'])[1]"
@@ -129,41 +127,47 @@ class FinishPage(Base):
 
     def input_user_name(self, user_credentials):
         self.get_user_name().send_keys(user_credentials)
-        print("Input user credentials")
+        print(f"Input user name: {user_credentials}")
 
     def input_user_phone(self, phone_number):
         self.get_user_phone().clear()
         self.get_user_phone().send_keys(phone_number)
-        print("Input user phone number")
+        print(f"Input user phone: 7{phone_number}")
 
     def input_user_email(self, user_email):
         self.get_user_email().send_keys(user_email)
-        print("Input user email")
+        print(f"Input user email: {user_email}")
 
     def click_save_button(self):
         self.get_save_button().click()
+        print("Save recipient data")
 
     def input_city_name(self, city):
         self.get_city_name().send_keys(city)
         self.get_city_name().send_keys(Keys.ENTER)
+        print(f"Input city: {city}")
 
     def click_cart_order_button(self):
         self.get_cart_order_button().click()
 
     def click_pickup_button(self):
         self.get_pickup_button().click()
+        print("Select pickup delivery")
 
     def input_pickup_name(self, pickup_name):
         self.get_pickup_name().send_keys(pickup_name)
+        print(f"Search pickup point: {pickup_name}")
 
     def click_pickup_ok_button(self):
         self.get_pickup_ok_button().click()
 
     def click_pickup_confirm(self):
         self.get_pickup_confirm().click()
+        print("Select pickup point")
 
     def input_change_sum(self, change_sum):
         self.get_change_sum().send_keys(change_sum)
+        print(f"Input change sum: {change_sum}")
 
     def click_sms_radio(self):
         element = self.get_sms_radio()
@@ -175,9 +179,11 @@ class FinishPage(Base):
 
     def input_order_comment(self, order_comment):
         self.get_order_comment().send_keys(order_comment)
+        print(f"Input order comment: {order_comment}")
 
     def click_submit_button(self):
-        self.get_submit_button()
+        self.get_submit_button().click()
+        print("Submit order")
 
     # METHODS
     def check_city(self):
@@ -212,22 +218,31 @@ class FinishPage(Base):
         self.assert_value(self.get_user_fio(), user_credentials)
         self.assert_phone(self.get_user_phone_assert(), phone_number)
         self.assert_value(self.get_user_mail_assert(), user_email)
+        print("Recipient data correct")
 
         self.check_city()
 
         self.click_pickup_button()
+
         self.input_pickup_name(pickup_name)
         self.click_pickup_confirm()
         self.click_pickup_ok_button()
 
-        print("Selected pickup point:", self.get_street_name().text)
-        print("Expected pickup point:", pickup_name)
+        selected_pickup = self.get_street_name().text
+        print(f"Selected pickup point: {selected_pickup}")
+        print(f"Expected pickup point: {pickup_name}")
 
         self.assert_value(self.get_street_name(), pickup_name)
+        print("Pickup point correct")
 
         self.input_change_sum(change_sum)
+
         self.click_sms_radio()
+
         self.input_order_comment(order_comment)
+
+        # закомментил от случайного нажатия + ордер потом только через ТП отменить можно,
+        # тест прогоняю без полного оформлнения
         # self.click_submit_button()
         # self.assert_value(self.get_order_info(), "успешно оформлен. Вся информация о заказе находится в Личном кабинете")
 
