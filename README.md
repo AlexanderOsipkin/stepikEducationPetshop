@@ -109,13 +109,10 @@ stepikEducationPetshop/
 ```
 
 ### `docs/screenshots`
-
 Contains screenshots illustrating the main pages and stages of the automated test scenario.
 
 ### `pages`
-
 Contains Page Object classes.
-
 Each page object contains:
 
 - page locators;
@@ -124,7 +121,6 @@ Each page object contains:
 - common actions related to the corresponding page.
 
 ### `pages/base.py`
-
 Contains common Selenium methods used by different pages, including:
 
 - getting the current URL;
@@ -136,31 +132,24 @@ Contains common Selenium methods used by different pages, including:
 - checking phone information.
 
 ### `pages/login_page.py`
-
 Contains methods and locators related to authentication.
 
 ### `pages/menu_page.py`
-
 Contains methods for working with the product catalog and filters.
-
 The current scenario uses the vitamins category and product filters.
 
 ### `pages/card_page.py`
-
 Contains methods for working with the selected product card.
 
 ### `pages/cart_page.py`
-
 Contains methods for working with the shopping cart.
 
 ### `pages/finish_page.py`
-
 Contains methods for working with the checkout page and order submission.
 
 ---
 
 ## Page Object Model
-
 The project uses the Page Object Model pattern.
 The main idea is to separate:
 
@@ -233,7 +222,6 @@ pip install -r requirements.txt
 ---
 
 ## Test configuration
-
 The browser is configured through the Pytest fixture in `conftest.py`.
 The project uses Chrome WebDriver.
 The application base URL is configured through the WebDriver fixture and is used by the Page Object classes instead of duplicating the URL in every page.
@@ -249,7 +237,6 @@ pytest -sv
 ```
 
 The `-s` option allows `print()` output to be displayed in the console.
-
 Run a specific test file:
 
 ```bash
@@ -265,7 +252,6 @@ pytest -sv tests/test_....py::TestClass::test_name
 ---
 
 ## Test scenario
-
 The main automated scenario is based on the following user journey:
 
 1. Log in to the application.
@@ -286,35 +272,29 @@ The main automated scenario is based on the following user journey:
 ---
 
 ## Screenshots
-
 The repository contains screenshots of the main stages of the tested user flow.
 
 ### Main page
-
 Screenshot of the main page of the pet shop website.
 
 ![Main page](docs/screenshots/main_page.png)
 
 ### Product catalog
-
 Screenshot of the product catalog with the required filters applied.
 
 ![Product catalog](docs/screenshots/product_catalog.png)
 
 ### Product card
-
 Screenshot of the selected product card.
 
 ![Product card](docs/screenshots/product_card.png)
 
 ### Shopping cart
-
 Screenshot of the shopping cart with the selected product.
 
 ![Shopping cart](docs/screenshots/cart.png)
 
 ### Checkout page
-
 Screenshot of the checkout page with the entered order information.
 
 ![Checkout page](docs/screenshots/checkout.png)
@@ -340,21 +320,8 @@ Each page is responsible for its own locators and interactions, while the test c
 ---
 
 ## Locator approach
+The project uses XPath locators to identify and interact with web elements.
+XPath expressions are stored in Page Object classes together with the corresponding page methods. This keeps locators separated from test scenarios and makes the test code easier to read and maintain.
 
-The project primarily uses stable HTML attributes such as:
 
-```text
-data-testid
-id
-```
-
-These attributes are preferable for UI automation because they are generally more stable than selectors based on visual text or CSS structure.
-
----
-
-## Test data
-
-Sensitive credentials should not be stored directly in the repository.
-If credentials are required for local execution, they should be provided through environment variables or another local configuration mechanism that is excluded from Git.
-Do not commit real passwords, tokens or other private credentials to GitHub.
 
