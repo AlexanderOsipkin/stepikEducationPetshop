@@ -6,7 +6,6 @@ The project was created as part of practical QA automation training and demonstr
 ---
 
 ## Project overview
-
 The test project covers the main user flow of the pet shop:
 
 ```text
@@ -30,7 +29,6 @@ Select notification method
   ↓
 Submit order
 ```
-
 The tests are focused on the critical user scenario from product selection to checkout.
 
 ---
@@ -38,14 +36,12 @@ The tests are focused on the critical user scenario from product selection to ch
 ## Covered functionality
 
 ### Authentication
-
 - Open the login page
 - Enter user credentials
 - Log in to the application
 - Verify successful authentication
 
 ### Product catalog
-
 - Open the product catalog
 - Select the vitamins category
 - Apply product filters
@@ -54,7 +50,6 @@ The tests are focused on the critical user scenario from product selection to ch
 - Verify that the expected products are displayed
 
 ### Product card
-
 - Open the selected product
 - Verify the product name
 - Verify the product brand
@@ -62,14 +57,12 @@ The tests are focused on the critical user scenario from product selection to ch
 - Add the product to the cart
 
 ### Shopping cart
-
 - Open the shopping cart
 - Verify the selected product
 - Verify the product price
 - Proceed to checkout
 
 ### Checkout
-
 - Enter or change the required order information
 - Add an order comment
 - Select SMS notification
@@ -79,7 +72,6 @@ The tests are focused on the critical user scenario from product selection to ch
 ---
 
 ## Project structure
-
 ```text
 stepikEducationPetshop/
 │
@@ -107,14 +99,12 @@ stepikEducationPetshop/
 ├── .gitignore
 └── README.md
 ```
-
 ### `docs/screenshots`
 Contains screenshots illustrating the main pages and stages of the automated test scenario.
 
 ### `pages`
 Contains Page Object classes.
 Each page object contains:
-
 - page locators;
 - methods for interacting with page elements;
 - reusable checks;
@@ -122,7 +112,6 @@ Each page object contains:
 
 ### `pages/base.py`
 Contains common Selenium methods used by different pages, including:
-
 - getting the current URL;
 - URL validation;
 - getting screenshots;
@@ -152,11 +141,9 @@ Contains methods for working with the checkout page and order submission.
 ## Page Object Model
 The project uses the Page Object Model pattern.
 The main idea is to separate:
-
 - test scenarios;
 - page locators;
 - page interaction methods.
-
 This makes the tests easier to read and allows common page actions to be reused in different tests.
 The general structure is:
 
@@ -198,7 +185,6 @@ cd stepikEducationPetshop
 ```bash
 python -m venv .venv
 ```
-
 Activate the virtual environment.
 
 #### Windows
@@ -229,31 +215,23 @@ The application base URL is configured through the WebDriver fixture and is used
 ---
 
 ## Run tests
-
 Run all tests:
-
 ```bash
 pytest -sv
 ```
-
 The `-s` option allows `print()` output to be displayed in the console.
 Run a specific test file:
-
 ```bash
 pytest -sv tests/test_....py
 ```
-
 Run a specific test:
-
 ```bash
 pytest -sv tests/test_....py::TestClass::test_name
 ```
-
 ---
 
 ## Test scenario
 The main automated scenario is based on the following user journey:
-
 1. Log in to the application.
 2. Open the product catalog.
 3. Select the vitamins category.
@@ -268,7 +246,6 @@ The main automated scenario is based on the following user journey:
 12. Select SMS notification.
 13. Submit the order.
 14. Verify the final order information.
-
 ---
 
 ## Screenshots
@@ -276,27 +253,22 @@ The repository contains screenshots of the main stages of the tested user flow.
 
 ### Main page
 Screenshot of the main page of the pet shop website.
-
 ![Main page](docs/screenshots/main_page.png)
 
 ### Product catalog
 Screenshot of the product catalog with the required filters applied.
-
 ![Product catalog](docs/screenshots/product_catalog.png)
 
 ### Product card
 Screenshot of the selected product card.
-
 ![Product card](docs/screenshots/product_card.png)
 
 ### Shopping cart
 Screenshot of the shopping cart with the selected product.
-
 ![Shopping cart](docs/screenshots/cart.png)
 
 ### Checkout page
 Screenshot of the checkout page with the entered order information.
-
 ![Checkout page](docs/screenshots/checkout.png)
 
 ---
@@ -314,14 +286,11 @@ CartPage
     ↓
 FinishPage
 ```
-
 Each page is responsible for its own locators and interactions, while the test contains the business scenario.
 
 ---
-
 ## Locator approach
 The project uses XPath locators to identify and interact with web elements.
 XPath expressions are stored in Page Object classes together with the corresponding page methods. This keeps locators separated from test scenarios and makes the test code easier to read and maintain.
 
-
-
+---
