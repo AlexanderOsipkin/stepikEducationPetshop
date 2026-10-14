@@ -31,4 +31,4 @@
 
 ## Important behavior
 
-The current purchase scenario intentionally stops before final order submission. The submit call and final confirmation assertion remain commented out to avoid creating a real order while practicing automation. The Allure report describes the behavior that is actually enabled in the test; it does not claim that an order was submitted.
+The current purchase scenario intentionally stops before final order submission. The submit call and final confirmation assertion remain commented out to avoid creating a real order while practicing automation. The Allure report describes the behavior that is actually enabled in the test it does not claim that an order was submitted.
