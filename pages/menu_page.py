@@ -1,3 +1,5 @@
+import allure
+
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -48,35 +50,43 @@ class MenuPage(Base):
         return WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.XPATH, self.product_title)))
 
     # ACTIONS
+    @allure.step("Open the vitamins category")
     def click_menu_vitamins(self):
         self.get_menu_vitamins().click()
         print("Click on vitamins in menu")
 
+    @allure.step("Open brand filter")
     def click_brand_button(self):
         self.get_brand_button().click()
         print("Click on brands button")
 
+    @allure.step("Find a brand in the filter: {text}")
     def input_search_brand(self, text):
         self.get_search_brand().send_keys(text)
         print(f"Search brand: {text}")
 
+    @allure.step("Select brand")
     def click_vitamins_checkbox(self):
         self.get_vitamins_checkbox().click()
         print("Select vitamin brand")
 
+    @allure.step("Apply filters")
     def click_apply_button(self):
         self.get_apply_button().click()
         print("Apply filter")
 
+    @allure.step("Open age filter")
     def click_age_button(self):
         self.get_age_button().click()
         print("Open age filter")
 
+    @allure.step("Select age")
     def click_age_checkbox(self):
         self.get_age_checkbox().click()
         print("Select age")
 
     # METHODS
+    @allure.step("Find vitamins by specified filters")
     def search_vitamins(self):
         self.driver.get(self.driver.base_url)
         self.get_current_url()

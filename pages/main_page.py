@@ -1,3 +1,5 @@
+import allure
+
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -19,16 +21,18 @@ class MainPage(Base):
         return WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.XPATH, self.product_brand_name)))
 
     # ACTIONS
-
+    @allure.step("Enter a search query: {text}")
     def input_text_in_search_field(self, text):
         self.get_search_field().send_keys(text)
         print(f"Input search text: {text}")
 
+    @allure.step("Start search")
     def accept_value_in_search_field(self):
         self.get_search_field().send_keys(Keys.ENTER)
         print("Press Enter in search field")
 
     # METHODS
+    @allure.step("Find a product using the search bar")
     def search_product(self):
         self.driver.get(self.driver.base_url)
         self.get_current_url()

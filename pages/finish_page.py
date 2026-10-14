@@ -1,4 +1,5 @@
 import os
+import allure
 
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
@@ -119,56 +120,74 @@ class FinishPage(Base):
         return WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located((By.XPATH, self.order_info)))
 
     # ACTIONS
+    @allure.step("Click first add button")
     def click_add_recipient1_button(self):
         self.get_add_recipient1_button().click()
 
+    @allure.step("Click add second button")
     def click_add_recipient2_button(self):
         self.get_add_recipient2_button().click()
 
+    @allure.step("Input user name")
     def input_user_name(self, user_credentials):
         self.get_user_name().send_keys(user_credentials)
         print(f"Input user name: {user_credentials}")
 
+    @allure.step("Input user phone")
     def input_user_phone(self, phone_number):
         self.get_user_phone().clear()
         self.get_user_phone().send_keys(phone_number)
         print(f"Input user phone: 7{phone_number}")
 
+    @allure.step("Input user email")
     def input_user_email(self, user_email):
         self.get_user_email().send_keys(user_email)
         print(f"Input user email: {user_email}")
 
+    @allure.step("Save recipient data")
     def click_save_button(self):
         self.get_save_button().click()
         print("Save recipient data")
 
+    @allure.step("Input city")
     def input_city_name(self, city):
         self.get_city_name().send_keys(city)
         self.get_city_name().send_keys(Keys.ENTER)
         print(f"Input city: {city}")
 
+    @allure.step("Select delivery method button")
+    def click_delivery_method_button(self):
+        self.get_delivery_method_button().click()
+
+    @allure.step("Click cart order button")
     def click_cart_order_button(self):
         self.get_cart_order_button().click()
 
+    @allure.step("Click pickup button")
     def click_pickup_button(self):
         self.get_pickup_button().click()
         print("Select pickup delivery")
 
+    @allure.step("Search pickup point")
     def input_pickup_name(self, pickup_name):
         self.get_pickup_name().send_keys(pickup_name)
         print(f"Search pickup point: {pickup_name}")
 
+    @allure.step("Click ok button")
     def click_pickup_ok_button(self):
         self.get_pickup_ok_button().click()
 
+    @allure.step("Select pickup point")
     def click_pickup_confirm(self):
         self.get_pickup_confirm().click()
         print("Select pickup point")
 
+    @allure.step("Input change sum")
     def input_change_sum(self, change_sum):
-        self.get_change_sum().send_keys(change_sum)
+        self.get_change_sum().send_keys(str(change_sum))
         print(f"Input change sum: {change_sum}")
 
+    @allure.step("Select SMS notification")
     def click_sms_radio(self):
         element = self.get_sms_radio()
 
@@ -177,15 +196,18 @@ class FinishPage(Base):
         assert element.is_selected()
         print("SMS notification selected")
 
+    @allure.step("Input order comment")
     def input_order_comment(self, order_comment):
         self.get_order_comment().send_keys(order_comment)
         print(f"Input order comment: {order_comment}")
 
+    @allure.step("Submit order")
     def click_submit_button(self):
         self.get_submit_button().click()
         print("Submit order")
 
     # METHODS
+    @allure.step("Check delivery city")
     def check_city(self):
         current_city = self.get_current_city().text
 
@@ -201,6 +223,7 @@ class FinishPage(Base):
         else:
             print("City correct")
 
+    @allure.step("Fill in the details on the checkout page")
     def confirm_order(self):
         self.get_current_url()
 

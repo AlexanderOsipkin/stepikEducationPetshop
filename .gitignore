@@ -161,7 +161,8 @@ cython_debug/
 .idea/
 
 #allure
-allure-results
-allure
+allure-results/
+allure-report/
+allure/
 
 screen

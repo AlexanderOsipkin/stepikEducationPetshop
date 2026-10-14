@@ -1,3 +1,5 @@
+import allure
+
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -30,15 +32,18 @@ class CartPage(Base):
         return WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located((By.XPATH, self.cart_order_button)))
 
     # ACTIONS
+    @allure.step("Open cart")
     def click_cart_button(self):
         self.get_cart_button().click()
         print("Open cart")
 
+    @allure.step("Proceed to Checkout")
     def click_cart_order_button(self):
         self.get_cart_order_button().click()
         print("Click checkout button")
 
     # METHODS
+    @allure.step("Check the items in your cart and proceed to checkout")
     def assert_product_in_cart(self):
         self.get_current_url()
 

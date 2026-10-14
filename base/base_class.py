@@ -1,5 +1,6 @@
 import re
 import datetime
+import allure
 
 from pathlib import Path
 from selenium.common.exceptions import TimeoutException
@@ -13,20 +14,23 @@ class Base():
     def __init__(self, driver):
         self.driver = driver
 
-    """Method get current url"""
+    @allure.step("Get current URL")
     def get_current_url(self):
+        """Method get current url"""
         current_url = self.driver.current_url
         print(f"Current URL: {current_url}")
 
-    """Method assert value"""
+    @allure.step("assert value")
     def assert_value(self, word, result):
+        """Method assert value"""
         actual_value = word.text
 
         assert actual_value == result, (f"Expected: '{result}', but got: '{actual_value}'")
         print(f"Good value: {actual_value}")
 
-    """Method screenshot"""
+    @allure.step("Save screenshot from Allure")
     def get_screenshot(self):
+        """Method screenshot"""
         now_date = datetime.datetime.now().strftime("%Y.%m.%d.%H.%M.%S")  # задаем переменную с текущим временем
         name_screenshot = f"screenshot_{now_date}.png"  # задаем название для скриншота
 
@@ -37,16 +41,17 @@ class Base():
         self.driver.save_screenshot(str(screenshot_path))
         print(f"Screenshot successfully saved: {screenshot_path}")
 
-    """Method assert url"""
-
+    @allure.step("Assert URL")
     def assert_url(self, result):
+        """Method assert url"""
         current_url = self.driver.current_url
 
         assert current_url == result, (f"Expected URL: '{result}', but got: '{current_url}'")
         print(f"Good URL: {current_url}")
 
-    """Method close popup"""
+    @allure.step("Close popup")
     def close_popup(self):
+        """Method close popup"""
         try:
             close_button = WebDriverWait(self.driver, 3).until(
                 EC.element_to_be_clickable((By.XPATH, "//button[@class='TutoringEcoTooltip_button__zhTqX']")))
@@ -56,16 +61,19 @@ class Base():
         except TimeoutException:
             print("Popup not found")
 
-    """Method close cookie"""
+    @allure.step("Close cookie popup")
     def close_cookie(self):
+        """Method close cookie"""
         try:
-            WebDriverWait(self.driver, 3).until(EC.element_to_be_clickable((By.XPATH, "//div[contains(@class, 'CookieInformer_informer')]//button[@title='Закрыть']"))).click()
+            WebDriverWait(self.driver, 3).until(EC.element_to_be_clickable(
+                (By.XPATH, "//div[contains(@class, 'CookieInformer_informer')]//button[@title='Закрыть']"))).click()
 
         except TimeoutException:
             print("Cookie popup not found")
 
-    """Method assert phone number"""
+    @allure.step("Assert phone number")
     def assert_phone(self, word, result):
+        """Method assert phone number"""
         actual_phone = re.sub(r"\D", "", word.text)
         expected_phone = re.sub(r"\D", "", result)
 

@@ -1,5 +1,6 @@
 import os
 import time
+import allure
 
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
@@ -43,25 +44,31 @@ class LoginPage(Base):
         return WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.XPATH, self.user_info_after_login)))
 
     # ACTIONS
+    @allure.step("Open login window")
     def click_enter_button(self):
         self.get_enter_button().click()
 
+    @allure.step("Select login using username and password")
     def click_login_button(self):
         self.get_login_button().click()
 
+    @allure.step("Enter login")
     def input_user_name(self, user_name):
         self.get_user_name().send_keys(user_name)
         print("Input user name")
 
+    @allure.step("Enter password")
     def input_user_password(self, password):
         self.get_user_password().send_keys(password)
         print("Input user password")
 
+    @allure.step("Confirm authorization")
     def click_authorization_button(self):
         self.get_authorization_button().click()
         print("Click authorization button")
 
     # METHODS
+    @allure.step("Log in to Petshop")
     def authorization(self):
         self.driver.get(self.driver.base_url)
         self.get_current_url()

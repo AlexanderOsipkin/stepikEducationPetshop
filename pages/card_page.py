@@ -1,3 +1,5 @@
+import allure
+
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -33,13 +35,16 @@ class CardPage(Base):
         return WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.XPATH, self.add_product_in_cart)))
 
     # ACTIONS
+    @allure.step("Open the vitamin card")
     def click_vitamins_card(self):
         self.get_vitamins_card().click()
 
+    @allure.step("Add item to cart")
     def click_add_product_in_cart(self):
         self.get_add_product_in_cart().click()
 
     # METHODS
+    @allure.step("Check the product card and add the product to the cart")
     def vitamin_card(self):
         self.get_current_url()
 

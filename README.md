@@ -271,6 +271,51 @@ The main automated scenario is based on the following user journey:
 
 ---
 
+## Allure reports
+
+The project uses `allure-pytest` to collect test metadata, named steps, screenshots and failure details.
+
+### What is included
+- Test titles, descriptions, severity, feature and story labels.
+- Named business steps in test functions and Page Object methods.
+- Screenshots attached at checkpoints where the project already captures screenshots.
+- An automatic screenshot and the current URL attached when a test fails during execution.
+- Fresh results are written to `allure-results/` on each Pytest run.
+
+### Generate and open a report
+
+1. Install Python dependencies in the active virtual environment:
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+2. Run the tests:
+
+   ```bash
+   pytest -sv
+   ```
+
+3. Open a temporary interactive report:
+
+   ```bash
+   allure serve allure-results
+   ```
+
+   `allure-pytest` collects results, but the `allure` command is a separate Allure Commandline installation. If the command is not found, install Allure Commandline and follow its setup instructions for your operating system.
+
+4. Or generate a static report folder:
+
+   ```bash
+   allure generate allure-results -o allure-report --clean
+   ```
+
+   The generated `allure-results/` and `allure-report/` folders are ignored by Git and should not be committed.
+
+**Important:** the current purchase test intentionally does not submit the final order. The call to submit the order remains commented out to prevent accidentally placing a real order during a test run.
+
+---
+
 ## Screenshots
 The repository contains screenshots of the main stages of the tested user flow.
 
